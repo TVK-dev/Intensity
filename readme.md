@@ -110,7 +110,7 @@ listPerc - отклонение максимумов в процентах от 
 borders - список границ событий автоматически  
 
 
-cut_events(Intencity, Borders, Typ, delta = 0)
+cut_events(Intencity, Borders, Typ, delta = 0)  
 Функция вырезания событий из списков, прочитанных функцией csv_to_lists из файла разметки, созданного программой разметки.
 Intensity - временной ряд интенсивности  
 Borders - разметка границ  
