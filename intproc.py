@@ -31,21 +31,31 @@ def csv_to_lists(fn):
             Type.append(int(c))
     return Intensity, Borders, Type
 
-def cut_events(Intensity, Borders, Typ):
+def CutEvents(Intencity, Borders, Typ, delta = 0):
     listevents = []
-    for i in range(len(Intensity)):
+    lborbers = []
+    for i in range(len(Intencity)):
         if Typ[i] == 4:
             levent = []
+            lborder = []
             for j in range(i, 0, -1):
                 if Borders[j] == 2:
                     break
-            for m in range(i, len(Intensity)):
+            for m in range(i, len(Intencity)):
                 if Borders[m] == 3:
-                    break    
+                    break
+            j = j - delta
+            m = m + delta
+            if j < 0:
+                j = 0
+            if m > len(Intencity) - 1:
+                m = len(Intencity) - 1
             for k in range(j, m + 1):
-                levent.append(Intensity[k])
-            listevents.append(levent)                
-    return listevents
+                levent.append(Intencity[k])
+                lborder.append(Borders[k])
+            listevents.append(levent) 
+            lborbers.append(lborder) 
+    return listevents, lborbers
 
 
 def find_max(MasDat, MA):  
