@@ -31,7 +31,7 @@ def csv_to_lists(fn):
             Type.append(int(c))
     return Intensity, Borders, Type
 
-def CutEvents(Intencity, Borders, Typ, delta = 0):
+def cut_events(Intencity, Borders, Typ, delta = 0):
     listevents = []
     lborbers = []
     for i in range(len(Intencity)):
