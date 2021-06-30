@@ -138,7 +138,8 @@ cut\_events(Intencity, Borders, Typ, delta = 0)
 
 ## Ссылки
 
-- Домашняя страница проекта: [https://github.com/TVK-dev/Intensity](https://github.com/TVK-dev/Intensity) Репозиторий: [https://github.com/TVK-dev/Intensity](https://github.com/TVK-dev/Intensity)
+- Домашняя страница проекта: [https://github.com/TVK-dev/Intensity](https://github.com/TVK-dev/Intensity) 
+- Репозиторий: [https://github.com/TVK-dev/Intensity](https://github.com/TVK-dev/Intensity)
 - Связанные проекты:
   - Программа разметки: https://github.com/TVK-dev/TruEvent
   - Репозиторий «AstrocyteLaboratory»: [https://github.com/UNN-VMK-Software/astro-analysis](https://github.com/UNN-VMK-Software/astro-analysis)
