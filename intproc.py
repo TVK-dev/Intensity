@@ -190,5 +190,58 @@ def file_to_events(filename):
     borders = calc_borders(Intensity)
     return LocalMaxIndex, listAbs, listPerc, borders
 
+def fill_graph(l):
+    ll = 0
+    for i in range(len(l)):
+        if l[i] != 0:
+            ll = l[i]
+        else:
+            l[i] = ll
+    return l
 
+def calc_phase(y1, y2):
+    MA = intproc.find_MA(y1)
+    LocalMinIndex1, LocalMin1 = intproc.find_min(y1, MA)
+    LocalMaxIndex1, LocalMax1 = intproc.find_max(y1, MA)
+    MA = intproc.find_MA(y2)
+    LocalMinIndex2, LocalMin2 = intproc.find_min(y2, MA)
+    LocalMaxIndex2, LocalMax2 = intproc.find_max(y2, MA)
+
+    lph = [0]*len(y1)
+    lf = [0]*len(y1)
+    ldeg = []
+    lfreq = []
+    jj = 0
+    jj1 = 0
+    for i in range(min(len(LocalMaxIndex2), len(LocalMaxIndex1))):
+    # цена градуса по опорной кривой
+        if LocalMaxIndex1[i] - LocalMaxIndex1[i + 1] != 0:
+            degpr  = 360/(LocalMaxIndex1[i] - LocalMaxIndex1[i + 1])
+    # отставание/опережение
+        mmin1 = 10e6  #минимум слева
+        mmin2 = 10e6
+        for j in range(len(LocalMaxIndex2)):
+            dist =  abs(LocalMaxIndex2[j] - LocalMaxIndex1[i])
+            if dist < mmin1 and LocalMaxIndex2[j] > LocalMaxIndex1[i]:    
+                mmin1 =  dist
+                jj = j
+            if dist < mmin2 and LocalMaxIndex2[j] <= LocalMaxIndex1[i]:    
+                mmin2 =  dist
+                jj1 = j
+    
+        if abs(LocalMaxIndex2[jj] - LocalMaxIndex1[i])<abs(LocalMaxIndex2[jj1] - LocalMaxIndex1[i]):    
+           deg = (LocalMaxIndex2[jj] - LocalMaxIndex1[i])*degpr
+        else:
+           deg = (LocalMaxIndex2[jj1] - LocalMaxIndex1[i])*degpr 
+        
+        if LocalMaxIndex2[jj] - LocalMinIndex2[jj+1] !=0:
+             freq = abs((LocalMaxIndex1[i] - LocalMinIndex1[i + 1])/(LocalMaxIndex2[jj] - LocalMinIndex2[jj + 1]))
+        ldeg.append(deg)
+        lfreq.append(freq)
+        lph[LocalMaxIndex2[i]] = deg
+        lf[LocalMaxIndex2[i]] = freq
+    
+    lph = fill_graph(lph)        
+    lf = fill_graph(lf) 
+    return lf, lph
 
